@@ -6,6 +6,7 @@ let selected_vocab = [];
 async function select_vocab(part) {
     let response = await fetch(`https://docs.google.com/spreadsheets/d/${spreadsheet_id}/export?gid=0&format=tsv`);
     let data = await response.text();
+    data = data.replaceAll('\r', '');
     data = data.substring(data.indexOf('\n') + 1) + '\n';
     while (data.indexOf('\n') != -1) {
         let temp = data.substring(0, data.indexOf('\n')) + '\t';
